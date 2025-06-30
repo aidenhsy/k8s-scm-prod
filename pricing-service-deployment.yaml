@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pricing-service
+  labels:
+    app: pricing-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pricing-service
+  template:
+    metadata:
+      labels:
+        app: pricing-service
+    spec:
+      containers:
+        - name: pricing-service
+          image: saihu-acr-registry-vpc.cn-hongkong.cr.aliyuncs.com/scm-prod/pricing-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4000
+            - containerPort: 5000
+          envFrom:
+            - secretRef:
+                name: pricing-service-secret
