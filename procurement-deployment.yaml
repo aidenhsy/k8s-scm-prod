@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: procurement-service
+  labels:
+    app: procurement-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: procurement-service
+  template:
+    metadata:
+      labels:
+        app: procurement-service
+    spec:
+      containers:
+        - name: procurement-service
+          image: saihu-acr-registry-vpc.cn-hongkong.cr.aliyuncs.com/scm-prod/procurement-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4082
+            - containerPort: 5082
+          envFrom:
+            - secretRef:
+                name: procurement-service-secret

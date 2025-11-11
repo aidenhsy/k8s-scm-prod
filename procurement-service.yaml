@@ -2,26 +2,26 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: id-service
+  name: procurement-service
 spec:
   type: ClusterIP
   selector:
-    app: id-service
+    app: procurement-service
   ports:
     - name: http
       port: 80
-      targetPort: 4085
+      targetPort: 4082
 ---
 # --- 2. in-cluster raw TCP ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: id-service-tcp
+  name: procurement-service-tcp
 spec:
   clusterIP: None
   selector:
-    app: id-service
+    app: procurement-service
   ports:
     - name: tcp-micro
-      port: 5085
-      targetPort: 5085
+      port: 5082
+      targetPort: 5082
